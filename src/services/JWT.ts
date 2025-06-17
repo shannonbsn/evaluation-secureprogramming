@@ -18,12 +18,12 @@ interface TokenPayload {
 
 export const generateTokens = (payload: TokenPayload) => {
   // Token d'accès principal
-  const accessToken = jwt.sign(payload, JWT_SECRET, {
+  const accessToken = jwt.sign({ payload, type: 'access' }, JWT_SECRET, {
     expiresIn: JWT_EXPIRES_IN
   });
 
   // Token de rafraîchissement
-  const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET, {
+  const refreshToken = jwt.sign({ payload, type: 'refresh' }, REFRESH_TOKEN_SECRET, {
     expiresIn: REFRESH_TOKEN_EXPIRES_IN
   });
 
